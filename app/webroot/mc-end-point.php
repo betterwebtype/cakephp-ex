@@ -14,8 +14,8 @@
   // setup th merge fields
   $mergeFields = array(
     // *** YOUR FIELDS GO HERE ***
-    'MERGE4' => $_GET['MERGE4'],
-    'MERGE5' => $_GET['MERGE5'],
+    'ATTEMPT' => $_GET['ATTEMPT'],
+    'TOPSCORE' => $_GET['TOPSCORE'],
     );
 
   // remove empty merge fields
