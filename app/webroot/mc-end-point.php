@@ -1,5 +1,6 @@
 <?php
 
+  header("Access-Control-Allow-Origin: *");
   // load in mailchimp library
   include('./MailChimp.php');
 
