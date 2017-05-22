@@ -12,21 +12,35 @@
   $list = 'b76a5d78ca'; // put your list ID here
   $email = $_GET['EMAIL']; // Get email address from form
   $id = md5(strtolower($email)); // Encrypt the email address
+
+  function emailExistsMc($email, $list){
+    global $MailChimp;
+    $subscriber_hash = $MailChimp->subscriberHash($email);
+    $result1 = $MailChimp->get("lists/$list/members/$subscriber_hash");
+    if($result1['status'] == '404') return false;
+    return true;
+  }
+
   // setup th merge fields
-  $mergeFields = array(
-    // *** YOUR FIELDS GO HERE ***
-    'ATTEMPT' => $_GET['ATTEMPT'],
-    'TOPSCORE' => $_GET['TOPSCORE'],
-    );
+  if (emailExistsMc) {
+    echo "Not storing source";
+  } else {
+    echo "Storing source.";
+  }
+  // $mergeFields = array(
+  //   // *** YOUR FIELDS GO HERE ***
+  //   'ATTEMPT' => $_GET['ATTEMPT'],
+  //   'TOPSCORE' => $_GET['TOPSCORE'],
+  //   );
 
-  // remove empty merge fields
-  $mergeFields = array_filter($mergeFields);
+  // // remove empty merge fields
+  // $mergeFields = array_filter($mergeFields);
 
-  $result = $MailChimp->put("lists/$list/members/$id", array(
-                  'email_address'     => $email,
-                  'status'            => 'subscribed',
-                  'merge_fields'      => $mergeFields,
-                  'update_existing'   => true, // YES, update old subscribers!
-              ));
-  // echo json_encode($result);
-  echo $_GET['callback'] . '('.json_encode($result).')';
+  // $result = $MailChimp->put("lists/$list/members/$id", array(
+  //                 'email_address'     => $email,
+  //                 'status'            => 'subscribed',
+  //                 'merge_fields'      => $mergeFields,
+  //                 'update_existing'   => true, // YES, update old subscribers!
+  //             ));
+  // // echo json_encode($result);
+  // echo $_GET['callback'] . '('.json_encode($result).')';
