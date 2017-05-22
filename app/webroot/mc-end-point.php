@@ -23,10 +23,10 @@
 
   // setup th merge fields
   if (emailExistsMc) {
-    echo $_GET['callback'] . '(Not storing source)';
+    echo $_GET['callback'] . '("Not storing source")';
     // echo "Not storing source";
   } else {
-    echo $_GET['callback'] . '(Storing source)';
+    echo $_GET['callback'] . '("Storing source")';
     // echo "Storing source.";
   }
   // $mergeFields = array(
