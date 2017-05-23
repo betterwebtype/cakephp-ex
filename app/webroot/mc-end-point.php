@@ -22,7 +22,7 @@
     } else {
       return true;
     }
-    echo $result1;
+    echo $result1['status'];
   }
 
   emailExistsMc($email, $list);
