@@ -37,6 +37,7 @@
       'LNAME' => $_GET['LNAME'],
       'ATTEMPT' => $_GET['ATTEMPT'],
       'TOPSCORE' => $_GET['TOPSCORE'],
+      'JOINED' => $_GET['JOINED'],
     );
   } else {
     echo "Storing source.";
