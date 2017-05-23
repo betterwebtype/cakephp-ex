@@ -31,11 +31,13 @@
 
   // setup th merge fields
   if (emailExists) {
+    echo "Not storing source.";
     $mergeFields = array(
       'ATTEMPT' => $_GET['ATTEMPT'],
       'TOPSCORE' => $_GET['TOPSCORE'],
     );
   } else {
+    echo "Storing source.";
     $mergeFields = array(
       'ATTEMPT' => $_GET['ATTEMPT'],
       'TOPSCORE' => $_GET['TOPSCORE'],
