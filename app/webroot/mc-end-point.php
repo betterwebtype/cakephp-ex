@@ -19,11 +19,11 @@
     $result = $MailChimp->get("lists/$list_id/members/$subscriber_hash");
     print_r($result['status']);
     if($result['status'] == '404'){
-      return false;
       echo "False";
+      return false;
     } else {
-      return true;
       echo "True";
+      return true;
     }
   }
 
