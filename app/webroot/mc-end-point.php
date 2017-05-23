@@ -19,7 +19,7 @@
     $result1 = $MailChimp->get("lists/$list/members/$subscriber_hash");
     if($result1['status'] == '404') return false;
     return true;
-    echo $_GET['callback'] . '('.json_encode($result1).')';
+    echo $result1;
   }
 
   emailExistsMc($email, $list);
