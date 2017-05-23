@@ -33,12 +33,16 @@
   if (emailExists) {
     echo "Not storing source.";
     $mergeFields = array(
+      'FNAME' => $_GET['FNAME'],
+      'LNAME' => $_GET['LNAME'],
       'ATTEMPT' => $_GET['ATTEMPT'],
       'TOPSCORE' => $_GET['TOPSCORE'],
     );
   } else {
     echo "Storing source.";
     $mergeFields = array(
+      'FNAME' => $_GET['FNAME'],
+      'LNAME' => $_GET['LNAME'],
       'ATTEMPT' => $_GET['ATTEMPT'],
       'TOPSCORE' => $_GET['TOPSCORE'],
       'JOINED' => $_GET['JOINED'],
