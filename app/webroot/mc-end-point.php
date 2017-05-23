@@ -36,7 +36,7 @@
       'LNAME' => $_GET['LNAME'],
       'ATTEMPT' => $_GET['ATTEMPT'],
       'TOPSCORE' => $_GET['TOPSCORE'],
-      'JOINED' => $_GET['JOINED'], //remove when it works
+      'JOINED' => $_GET['JOINED'], //remove when it works test
     );
   } else {
     $mergeFields = array(
