@@ -13,18 +13,18 @@
   $email = $_GET['EMAIL']; // Get email address from form
   $id = md5(strtolower($email)); // Encrypt the email address
 
-  function emailExistsMc($email, $list){
+  function emailExistsMc($subscriberMail, $list_id){
     global $MailChimp;
-    // $subscriber_hash = $MailChimp->subscriberHash($email);
-    $id = md5(strtolower($email)); // Encrypt the email address
-    $result1 = $MailChimp->get("lists/$list/members/$id");
-    if($result1['status'] == '404'){
+    $subscriber_hash = $MailChimp->subscriberHash($subscriberMail);
+    $result = $MailChimp->get("lists/$list_id/members/$subscriber_hash");
+    if($result['status'] == '404'){
       return false;
+      echo "False";
     } else {
       return true;
+      echo "True";
     }
-    echo $result1['status'];
-  }
+}
 
   emailExistsMc($email, $list);
 
