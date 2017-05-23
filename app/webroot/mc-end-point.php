@@ -22,6 +22,8 @@
     echo $_GET['callback'] . '('.json_encode($result1).')';
   }
 
+  emailExistsMc($email, $list);
+
   // // setup th merge fields
   // if (emailExistsMc) {
   //   // echo $_GET['callback'] . '("Not storing source")';
