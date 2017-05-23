@@ -17,6 +17,8 @@
     global $MailChimp;
     $subscriber_hash = $MailChimp->subscriberHash($subscriberMail);
     $result = $MailChimp->get("lists/$list_id/members/$subscriber_hash");
+    echo $subscriber_hash;
+    echo $result;
     echo "test";
     if($result['status'] == '404'){
       return false;
@@ -27,7 +29,7 @@
     }
   }
 
-  // emailExistsMc($email, $list);
+  emailExistsMc($email, $list);
 
   // // setup th merge fields
   // if (emailExistsMc) {
