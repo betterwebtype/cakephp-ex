@@ -27,7 +27,7 @@
     }
   }
 
-  emailExistsMc($email, $list);
+  // emailExistsMc($email, $list);
 
   // // setup th merge fields
   // if (emailExistsMc) {
