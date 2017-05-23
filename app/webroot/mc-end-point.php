@@ -15,10 +15,13 @@
 
   function emailExistsMc($email, $list){
     global $MailChimp;
-    $subscriber_hash = $MailChimp->subscriberHash($email);
-    $result1 = $MailChimp->get("lists/$list/members/$subscriber_hash");
-    if($result1['status'] == '404') return false;
-    return true;
+    // $subscriber_hash = $MailChimp->subscriberHash($email);
+    $result1 = $MailChimp->get("lists/$list/members/$id");
+    if($result1['status'] == '404'){
+      return false;
+    } else {
+      return true;
+    }
     echo $result1;
   }
 
