@@ -17,9 +17,7 @@
     global $MailChimp;
     $subscriber_hash = $MailChimp->subscriberHash($subscriberMail);
     $result = $MailChimp->get("lists/$list_id/members/$subscriber_hash");
-    echo $subscriber_hash;
-    print_r($result);
-    echo "test";
+    print_r($result['status']);
     if($result['status'] == '404'){
       return false;
       echo "False";
