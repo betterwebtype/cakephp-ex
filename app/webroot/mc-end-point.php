@@ -17,6 +17,7 @@
     global $MailChimp;
     $subscriber_hash = $MailChimp->subscriberHash($subscriberMail);
     $result = $MailChimp->get("lists/$list_id/members/$subscriber_hash");
+    echo "test";
     if($result['status'] == '404'){
       return false;
       echo "False";
@@ -24,7 +25,7 @@
       return true;
       echo "True";
     }
-}
+  }
 
   emailExistsMc($email, $list);
 
