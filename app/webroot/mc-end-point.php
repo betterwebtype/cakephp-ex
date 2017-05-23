@@ -59,4 +59,4 @@
                   'update_existing'   => true, // YES, update old subscribers!
               ));
   // echo json_encode($result);
-  echo $_GET['callback'] . '('.json_encode($result).')';
+  echo $_GET['callback'] . '('.json_encode($result).');';
