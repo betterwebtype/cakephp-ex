@@ -16,6 +16,7 @@
   function emailExistsMc($email, $list){
     global $MailChimp;
     // $subscriber_hash = $MailChimp->subscriberHash($email);
+    $id = md5(strtolower($email)); // Encrypt the email address
     $result1 = $MailChimp->get("lists/$list/members/$id");
     if($result1['status'] == '404'){
       return false;
