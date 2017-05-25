@@ -114,9 +114,17 @@
   }
 
   $interests = array(
-    'f498944bda' => $_GET['GROUPWEBDES'],
-    '841aa1ddc6' => $_GET['GROUPWEBDEV'],
+  //   'f498944bda' => $_GET['GROUPWEBDES'],
+  //   '841aa1ddc6' => $_GET['GROUPWEBDEV'],
   );
+
+  $interestValue = $_GET['INTEREST'];
+
+  if ($interestValue == 1){
+    $interests['f498944bda'] = true,
+  } elseif ($interestValue == 2) {
+    $interests['841aa1ddc6'] = true,
+  }
 
   // print_r($mergeFields);
 
