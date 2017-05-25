@@ -113,6 +113,11 @@
     }
   }
 
+  $interests = array(
+    'f498944bda' => $_GET['GROUPWEBDES'],
+    '841aa1ddc6' => $_GET['GROUPWEBDEV'],
+  );
+
   // print_r($mergeFields);
 
   // remove empty merge fields
@@ -122,6 +127,7 @@
                   'email_address'     => $email,
                   'status'            => $status,
                   'merge_fields'      => $mergeFields,
+                  'interests'         => $interests,
                   'update_existing'   => true, // YES, update old subscribers!
               ));
   // echo json_encode($result);
