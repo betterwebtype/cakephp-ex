@@ -121,9 +121,9 @@
   $interestValue = $_GET['INTEREST'];
 
   if ($interestValue == 1){
-    $interests['f498944bda'] = true,
+    $interests['f498944bda'] = true;
   } elseif ($interestValue == 2) {
-    $interests['841aa1ddc6'] = true,
+    $interests['841aa1ddc6'] = true;
   }
 
   // print_r($mergeFields);
