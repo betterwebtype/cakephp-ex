@@ -130,6 +130,7 @@
 
   // remove empty merge fields
   $mergeFields = array_filter($mergeFields);
+  $interests = array_filter($interests);
 
   $result = $MailChimp->put("lists/$list/members/$id", array(
                   'email_address'     => $email,
