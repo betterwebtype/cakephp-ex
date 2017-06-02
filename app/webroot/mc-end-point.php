@@ -16,6 +16,8 @@
   $status;
   $attempt;
   $topscore;
+  $interests;
+  $interestId;
 
   function emailExistsMc($subscriberMail, $list_id){
     global $MailChimp;
@@ -73,6 +75,24 @@
     }
   }
 
+  function checkInterestsMc($subscriberMail, $list_id){
+    global $MailChimp;
+    global $interestId;
+    $subscriber_hash = $MailChimp->subscriberHash($subscriberMail);
+    $result = $MailChimp->get("lists/$list_id/members/$subscriber_hash");
+    // print_r($result['status']);
+    // print_r($result);
+    if($result['interests']['f498944bda'] == false && $result['interests']['841aa1ddc6'] == false){
+      return false;
+    } else if ( $result['interests']['f498944bda'] == true ){
+      $interestId = 'f498944bda';
+      return true;
+    } else if ( $result['interests']['841aa1ddc6'] == true ) {
+      $interestId = '841aa1ddc6';
+      return true;
+    }
+  }
+
 // emailExistsMc($email, $list);
 // sendCourseMc($email, $list);
 // checkAttemptMc($email, $list);
@@ -81,6 +101,8 @@
   $sendCourse = sendCourseMc($email, $list);
   $checkAttempt = checkAttemptMc($email, $list);
   $checkTopscore = checkTopscoreMc($email, $list);
+  $checkInterests = checkInterestsMc($email, $list);
+  // print_r($checkInterests);
 
   // setup th merge fields
   $mergeFields = array(
@@ -88,6 +110,7 @@
     'LNAME' => $_GET['LNAME'],
     'PLAYEDTRI' => $_GET['PLAYEDTRI'],
   );
+
   if ($emailExists == false) {
     $status = 'pending';
     $mergeFields['ATTEMPT'] = $_GET['ATTEMPT'];
@@ -97,14 +120,17 @@
   } else {
     $status = 'subscribed';
   }
+
   if ($sendCourse == false) {
     $mergeFields['SENDCOURSE'] = $_GET['SENDCOURSE'];
   }
+
   if ($checkAttempt == false) {
     $mergeFields['ATTEMPT'] = $_GET['ATTEMPT'];
   } else {
     $mergeFields['ATTEMPT'] = $attempt + $_GET['ATTEMPT'];
   }
+
   if ($checkTopscore == false) {
     $mergeFields['TOPSCORE'] = $_GET['TOPSCORE'];
   } else {
@@ -113,32 +139,45 @@
     }
   }
 
+  $interestValue = $_GET['INTEREST'];
+  // print_r($interestValue);
+  // if (empty($interestValue)){
+  //   echo "Yes the variable is empty";
+  // }
+
   $interests = array(
-  //   'f498944bda' => $_GET['GROUPWEBDES'],
-  //   '841aa1ddc6' => $_GET['GROUPWEBDEV'],
+    'f498944bda' => false,
+    '841aa1ddc6' => false,
   );
 
-  $interestValue = $_GET['INTEREST'];
-
-  if ($interestValue == 1){
-    $interests['f498944bda'] = true;
-  } elseif ($interestValue == 2) {
-    $interests['841aa1ddc6'] = true;
+  if ($checkInterests == true) {
+    $interests[$interestId] = true;
+  } elseif ($checkInterests == false) {
+    if ($interestValue == 1){
+      $interests['f498944bda'] = true;
+    } elseif ($interestValue == 2) {
+      $interests['841aa1ddc6'] = true;
+    }
   }
 
-  // print_r($mergeFields);
+  // print_r($interests);
 
   // remove empty merge fields
   $mergeFields = array_filter($mergeFields);
-  $interests = array_filter($interests);
+  // $interests = array_filter($interests);
 
-
-  $result = $MailChimp->put("lists/$list/members/$id", array(
+  $mcInfo = array(
                   'email_address'     => $email,
                   'status'            => $status,
                   'merge_fields'      => $mergeFields,
-                  'interests'         => $interests,
                   'update_existing'   => true, // YES, update old subscribers!
-              ));
+              );
+  if ($interestValue == 1 || $interestValue == 2){
+    $mcInfo['interests'] = $interests;
+  }
+
+  // print_r($mcInfo);
+
+  $result = $MailChimp->put("lists/$list/members/$id", $mcInfo);
   // echo json_encode($result);
   echo $_GET['callback'] . '('.json_encode($result).')';
