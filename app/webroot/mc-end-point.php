@@ -109,6 +109,7 @@
     'FNAME' => $_GET['FNAME'],
     'LNAME' => $_GET['LNAME'],
     'PLAYEDTRI' => $_GET['PLAYEDTRI'],
+    'SAMPLE' => $_GET['SAMPLE'],
   );
 
   if ($emailExists == false) {
